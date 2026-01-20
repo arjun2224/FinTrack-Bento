@@ -454,17 +454,17 @@ export function Dashboard() {
                         <Plus className="h-4 w-4 mr-2" />
                         Add Transaction
                     </Button>
-                    <Button
-                        variant="ghost"
-                        size="sm"
-                        className="text-destructive hover:text-destructive hover:bg-destructive/10 gap-2"
-                        onClick={async () => {
-                            await logout();
-                        }}
-                    >
-                        <LogOut className="h-4 w-4" />
-                        Sign Out
-                    </Button>
+                    <form action={logout}>
+                        <Button
+                            variant="ghost"
+                            size="sm"
+                            type="submit"
+                            className="text-destructive hover:text-destructive hover:bg-destructive/10 gap-2"
+                        >
+                            <LogOut className="h-4 w-4" />
+                            Sign Out
+                        </Button>
+                    </form>
                 </div>
             </header>
 
