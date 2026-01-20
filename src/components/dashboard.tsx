@@ -16,6 +16,7 @@ import { Plus, RefreshCw, Wallet, Settings, Upload, LogOut } from "lucide-react"
 import Link from "next/link";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useMemo, useCallback } from "react";
+import { logout } from "@/app/actions/auth";
 
 // Types for API response
 interface PortfolioData {
@@ -458,7 +459,7 @@ export function Dashboard() {
                         size="sm"
                         className="text-destructive hover:text-destructive hover:bg-destructive/10 gap-2"
                         onClick={async () => {
-                            await import("@/app/actions/auth").then(m => m.logout());
+                            await logout();
                         }}
                     >
                         <LogOut className="h-4 w-4" />
