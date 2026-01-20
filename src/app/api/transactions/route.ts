@@ -68,6 +68,7 @@ export async function POST(request: NextRequest) {
                 user = await prisma.user.create({
                     data: {
                         email: "default@fintrack.local",
+                        password: "default-password-change-me",
                     },
                 });
             }

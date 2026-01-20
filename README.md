@@ -78,6 +78,31 @@ Designed with a **Glassmorphism** UI and **Bento Grid** layout, it offers a prem
     ```
     Access the app at `http://localhost:3000`.
 
+## 🐳 Docker
+
+### Build the Image
+```bash
+docker build -t fintrack-bento .
+```
+
+### Run the Container
+```bash
+docker run -p 3000:3000 \
+  -v $(pwd)/prisma/dev.db:/app/prisma/dev.db \
+  -e DATABASE_URL="file:/app/prisma/dev.db" \
+  -e AUTH_SECRET="your-secret-key" \
+  -e AUTH_TRUST_HOST=true \
+  fintrack-bento
+```
+
+| Variable | Description |
+|----------|-------------|
+| `DATABASE_URL` | SQLite database path |
+| `AUTH_SECRET` | Secret for NextAuth session encryption |
+| `AUTH_TRUST_HOST` | Required for Docker to trust localhost |
+
+> **Note**: Mount your local `dev.db` file to persist data. For a fresh database, run `npx prisma db push && npx prisma db seed` before starting the container.
+
 ## 🛡️ Usage
 
 ### Default Admin Credentials
