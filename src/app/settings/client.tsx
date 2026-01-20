@@ -272,7 +272,7 @@ export default function SettingsClient({
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
+        <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5 animate-fade-in">
             {/* Header */}
             <header className="sticky top-0 z-50 glass border-b border-border/50">
                 <div className="container max-w-4xl mx-auto px-4 py-4">

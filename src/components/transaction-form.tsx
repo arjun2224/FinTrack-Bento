@@ -311,7 +311,7 @@ export function TransactionForm({ onSuccess }: TransactionFormProps) {
 
     return (
         <Dialog open={isAddTransactionOpen} onOpenChange={setAddTransactionOpen}>
-            <DialogContent className="sm:max-w-[500px] glass-card !bg-[rgba(20,20,30,0.90)]">
+            <DialogContent className="sm:max-w-[500px] glass-card dark:!bg-[rgba(20,20,30,0.90)]">
                 <DialogHeader>
                     <DialogTitle className="flex items-center gap-2">
                         Add Transaction
@@ -341,7 +341,7 @@ export function TransactionForm({ onSuccess }: TransactionFormProps) {
                                 <SelectTrigger id="assetType">
                                     <SelectValue />
                                 </SelectTrigger>
-                                <SelectContent className="!bg-[#0f0f16] !border-border/50">
+                                <SelectContent className="dark:!bg-[#0f0f16] !bg-white !border-border/50">
                                     {filteredAssetTypes.map((opt) => (
                                         <SelectItem key={opt.value} value={opt.value}>
                                             {opt.label}
@@ -440,7 +440,7 @@ export function TransactionForm({ onSuccess }: TransactionFormProps) {
 
                             {/* Autocomplete Dropdown */}
                             {showDropdown && searchResults.length > 0 && (
-                                <div className="absolute z-50 w-full mt-1 max-h-48 overflow-auto rounded-md border border-border/50 bg-[#0f0f16] shadow-xl">
+                                <div className="absolute z-50 w-full mt-1 max-h-48 overflow-auto rounded-md border border-border/50 dark:bg-[#0f0f16] bg-white shadow-xl">
                                     {searchResults.map((result, index) => (
                                         <button
                                             key={`${result.ticker}-${index}`}
