@@ -1,0 +1,74 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id           String      @id @default(cuid())
+  email        String      @unique
+  password     String
+  role         String      @default("USER") // "ADMIN" | "USER"
+  currencyPref String      @default("INR")
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  portfolios   Portfolio[]
+}
+
+model Portfolio {
+  id           String        @id @default(cuid())
+  userId       String
+  name         String
+  type         String        @default("General") // "Retirement", "Trading", etc.
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  transactions Transaction[]
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Asset {
+  id           String        @id @default(cuid())
+  ticker       String        @unique
+  isin         String?
+  name         String
+  provider     String        // "YAHOO" | "MFAPI"
+  assetType    String        // "STOCK" | "MUTUAL_FUND" | "CRYPTO" | "SGB" | "CASH"
+  market       String        // "IN" | "US" | "CRYPTO"
+  sector       String?
+  createdAt    DateTime      @default(now())
+  transactions Transaction[]
+}
+
+model Transaction {
+  id          String    @id @default(cuid())
+  portfolioId String
+  assetId     String
+  type        String    // "BUY" | "SELL"
+  quantity    Float
+  price       Float
+  currency    String    @default("INR")
+  date        DateTime
+  fxRate      Float     @default(1.0) // USD/INR at trade time
+  isSIP       Boolean   @default(false) // Is this a SIP installment?
+  sipId       String?   // Optional SIP series ID to group SIP transactions
+  notes       String?
+  createdAt   DateTime  @default(now())
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+  asset       Asset     @relation(fields: [assetId], references: [id])
+}
+
+model PriceCache {
+  ticker      String   @id
+  price       Float
+  currency    String
+  change      Float?
+  changePercent Float?
+  previousClose Float?
+  lastUpdated DateTime @updatedAt
+}
