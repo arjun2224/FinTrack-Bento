@@ -455,13 +455,14 @@ export function Dashboard() {
                     </Button>
                     <Button
                         variant="ghost"
-                        size="icon"
+                        size="sm"
+                        className="text-destructive hover:text-destructive hover:bg-destructive/10 gap-2"
                         onClick={async () => {
                             await import("@/app/actions/auth").then(m => m.logout());
                         }}
-                        title="Sign Out"
                     >
-                        <LogOut className="h-4 w-4 text-destructive" />
+                        <LogOut className="h-4 w-4" />
+                        Sign Out
                     </Button>
                 </div>
             </header>
